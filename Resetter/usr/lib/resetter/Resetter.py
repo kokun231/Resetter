@@ -15,6 +15,7 @@ from PyQt5 import QtCore, QtGui, QtSvg
 from PyQt5.QtWidgets import *
 
 from AboutPage import About
+from HelloPage import HelloPage
 from CustomReset import AppWizard
 from EasyInstall import EasyInstaller
 from EasyRepo import EasyPPAInstall
@@ -67,6 +68,8 @@ class UiMainWindow(QMainWindow):
         self.actionExit.triggered.connect(qApp.quit)
         self.actionAbout = QAction(self)
         self.actionAbout.triggered.connect(self.about)
+        self.actionHelloPage = QAction(self)
+        self.actionHelloPage.triggered.connect(self.showHelloPage)
         self.actionEasyPPA = QAction(self)
         self.actionEasyPPA.triggered.connect(self.searchLaunchpad)
         self.actionEasyPPA.setStatusTip("The easiest way to get and install PPAs right from launchpad.net.")
@@ -99,6 +102,7 @@ class UiMainWindow(QMainWindow):
         self.menuHelp.addAction(self.actionUpdateManifests)
         self.menuHelp.addAction(self.actionUpdateUserlists)
 
+        self.menuHelp.addAction(self.actionHelloPage)
         self.menuHelp.addAction(self.actionAbout)
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuView.menuAction())
@@ -114,6 +118,7 @@ class UiMainWindow(QMainWindow):
 
         self.actionSaveSnapshot.setText('Save')
         self.actionAbout.setText("About")
+        self.actionHelloPage.setText("Hello Page")
         self.actionEasyPPA.setText("Easy PPA")
         self.actionShow_missing.setText("Show missing pre-installed packages")
         self.actionEditSources.setText("Edit Sources")
@@ -413,6 +418,10 @@ class UiMainWindow(QMainWindow):
     def about(self):
         about = About(self)
         about.show()
+
+    def showHelloPage(self):
+        hello_page = HelloPage(self)
+        hello_page.show()
 
     def processManifest(self):
         try:
