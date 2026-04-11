@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bat Animation</title>
+  <style>
+    body {
+      background: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    /* Workaround: make the bat visible with a pseudo-element bat shape */
+    .bat {
+      width: 1px;
+      height: 1px;
+      transform: scale(4);
+      position: relative;
+      left: -128px;
+      top: -128px;
+      -webkit-animation: 0.4s bat steps(1) infinite;
+              animation: 0.4s bat steps(1) infinite;
+    }
+
+    /* CSS bat shape using box-shadow pixel art */
+    .bat::before {
+      content: '';
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      background: #fff;
+      /* Pixel art bat - wings up frame */
+      box-shadow:
+        /* body */
+        4px 4px 0 #333,
+        5px 4px 0 #333,
+        6px 4px 0 #333,
+        /* head */
+        5px 3px 0 #555,
+        /* wings up */
+        1px 2px 0 #555,
+        2px 2px 0 #555,
+        3px 3px 0 #555,
+        7px 3px 0 #555,
+        8px 2px 0 #555,
+        9px 2px 0 #555,
+        /* ears */
+        4px 2px 0 #555,
+        6px 2px 0 #555;
+      background: transparent;
+    }
+
+    @keyframes bat {
+      0% {
+        /* wings up */
+        filter: brightness(1);
+      }
+      50% {
+        /* wings down - shift shadow */
+        filter: brightness(1.4);
+      }
+    }
+
+    /* Alternative: pure CSS animated bat next to it for comparison */
+    .bat2 {
+      position: absolute;
+      font-size: 48px;
+      animation: flap 0.4s steps(1) infinite;
+    }
+
+    @keyframes flap {
+      0%   { content: '🦇'; transform: scaleY(1); }
+      50%  { transform: scaleY(-1); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Original .bat class with workaround keyframes -->
+  <div style="position:relative; left:150px; top:150px;">
+    <div class="bat"></div>
+  </div>
+
+  <!-- Simpler visible fallback using emoji -->
+  <div class="bat2">🦇</div>
+</body>
+</html>
